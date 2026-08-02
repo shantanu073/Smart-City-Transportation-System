@@ -38,14 +38,19 @@ ON t.trip_id = f.trip_id ;
 
 SELECT * FROM Driver_Performance_Metric;
 
-# Q9
 # Q8. Create a new archive table for historical trips
 
 CREATE TABLE trips_archive
 LIKE trips;
 
-# Q10. Add a check constraint on payments amount greater than zero
+# Q9. Add a check constraint on payments amount greater than zero
 
 ALTER TABLE payments
-MODIFY amount DECIMAL(10,2) check(amount > 0);
+MODIFY amount DECIMAL(10,2),
+ADD CONSTRAINT chk_amount_positive
+CHECK (amount > 0);
+
+# Q10.	Create a monthly partitioning strategy for trips.
+
+
 
